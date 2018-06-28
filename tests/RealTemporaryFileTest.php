@@ -6,7 +6,14 @@ use PHPUnit\Framework\TestCase;
 
 class RealTemporaryFileTest extends TestCase
 {
-    public function test1()
+    public function testRealPathIsNotFalse()
+    {
+        $file = new RealTemporaryFile();
+
+        $this->assertNotFalse($file->getRealPath());
+    }
+
+    public function testWriteAndRead()
     {
         $numbers = ['1', '2', '3'];
         $file = new RealTemporaryFile();
@@ -14,8 +21,6 @@ class RealTemporaryFileTest extends TestCase
         foreach ($numbers as $number) {
             $file->fwrite($number . PHP_EOL);
         }
-
-        $this->assertNotFalse($file->getRealPath());
 
         foreach ($file as $idx => $line) {
             $actual = trim($line);

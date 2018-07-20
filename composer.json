@@ -1,7 +1,7 @@
 {
     "name": "kalibora/real-temporary-file",
     "description": "A real temporary file. not in memory.",
-    "keywords": ["temporary"],
+    "keywords": ["temporary", "file", "directory"],
     "license": "MIT",
     "authors": [
         {

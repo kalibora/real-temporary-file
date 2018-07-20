@@ -9,6 +9,8 @@ return \PhpCsFixer\Config::create()
     ->setRules([
         '@Symfony' => true,
         'concat_space' => false,
+        'phpdoc_summary' => false,
+        'yoda_style' => false,
     ])
     ->setFinder($finder)
     ->setUsingCache(false)

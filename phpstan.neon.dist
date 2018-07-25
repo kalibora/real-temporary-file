@@ -1,4 +1,3 @@
 parameters:
     excludes_analyse:
     ignoreErrors:
-        - '#Strict comparison using === between string and false will always evaluate to false#'

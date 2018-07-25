@@ -13,6 +13,10 @@ class RealTemporaryFile extends \SplFileObject
 
     public function __destruct()
     {
+        if ($this->getRealPath() === false) {
+            return;
+        }
+
         unlink($this->getRealPath());
     }
 }

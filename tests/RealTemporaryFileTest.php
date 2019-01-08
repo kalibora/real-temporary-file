@@ -30,4 +30,20 @@ class RealTemporaryFileTest extends TestCase
             }
         }
     }
+
+    public function testFilename()
+    {
+        $file = new RealTemporaryFile();
+
+        $this->assertRegexp('/^kalibora_real_tmp_.*$/', $file->getFilename());
+        $this->assertSame('', $file->getExtension());
+    }
+
+    public function testFilenameWithExtension()
+    {
+        $file = RealTemporaryFile::createWithExtension('txt');
+
+        $this->assertRegexp('/^kalibora_real_tmp_.*\.txt$/', $file->getFilename());
+        $this->assertSame('txt', $file->getExtension());
+    }
 }

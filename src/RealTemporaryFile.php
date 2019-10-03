@@ -2,6 +2,8 @@
 
 namespace Kalibora\RealTemporaryFile;
 
+use Zend\Diactoros\UploadedFile;
+
 class RealTemporaryFile extends \SplFileObject
 {
     public const DEFAULT_PREFIX = 'kalibora_real_tmp_';
@@ -24,6 +26,14 @@ class RealTemporaryFile extends \SplFileObject
         }
 
         unlink($this->getRealPath());
+    }
+
+    /**
+     * Mimicry UploadedFile
+     */
+    public function toUploadedFile($clientFilename = null, $clientMediaType = null) : RealTemporaryUploadedFile
+    {
+        return new RealTemporaryUploadedFile($this, $clientFilename, $clientMediaType);
     }
 
     public static function createWithExtension(string $extension) : self

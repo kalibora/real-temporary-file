@@ -3,6 +3,7 @@
 namespace Kalibora\RealTemporaryFile;
 
 use PHPUnit\Framework\TestCase;
+use Zend\Diactoros\UploadedFile;
 
 class RealTemporaryFileTest extends TestCase
 {
@@ -45,5 +46,14 @@ class RealTemporaryFileTest extends TestCase
 
         $this->assertRegexp('/^kalibora_real_tmp_.*\.txt$/', $file->getFilename());
         $this->assertSame('txt', $file->getExtension());
+    }
+
+    public function testToUploadedFile()
+    {
+        $file = new RealTemporaryFile();
+
+        $uploadedFile = $file->toUploadedFile();
+
+        $this->assertInstanceOf(UploadedFile::class, $uploadedFile);
     }
 }

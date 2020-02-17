@@ -4,9 +4,14 @@ namespace Kalibora\RealTemporaryFile;
 
 use Zend\Diactoros\UploadedFile;
 
+/**
+ * @method string getRealPath()
+ */
 class RealTemporaryFile extends \SplFileObject
 {
     public const DEFAULT_PREFIX = 'kalibora_real_tmp_';
+
+    private $destructed = false;
 
     public function __construct(string $prefix = self::DEFAULT_PREFIX, string $extension = null)
     {
@@ -21,11 +26,13 @@ class RealTemporaryFile extends \SplFileObject
 
     public function __destruct()
     {
-        if ($this->getRealPath() === false) {
+        if ($this->destructed) {
             return;
         }
 
         unlink($this->getRealPath());
+
+        $this->destructed = true;
     }
 
     /**

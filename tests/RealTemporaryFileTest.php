@@ -56,4 +56,18 @@ class RealTemporaryFileTest extends TestCase
 
         $this->assertInstanceOf(UploadedFile::class, $uploadedFile);
     }
+
+    public function testRemoveFile()
+    {
+        $file = new RealTemporaryFile();
+
+        $filePath = $file->getRealPath();
+
+        $this->assertTrue(file_exists($filePath));
+
+        // Force destruction
+        $file->__destruct();
+
+        $this->assertFalse(file_exists($filePath));
+    }
 }

@@ -5,8 +5,13 @@ namespace Kalibora\RealTemporaryFile;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
+/**
+ * @method string getRealPath()
+ */
 class RealTemporaryDirectory extends \SplFileInfo
 {
+    private $destructed = false;
+
     /**
      * See: https://stackoverflow.com/a/1707859
      */
@@ -36,7 +41,7 @@ class RealTemporaryDirectory extends \SplFileInfo
      */
     public function __destruct()
     {
-        if ($this->getRealPath() === false || $this->getRealPath() === '') {
+        if ($this->destructed) {
             return;
         }
 
@@ -52,5 +57,7 @@ class RealTemporaryDirectory extends \SplFileInfo
         }
 
         rmdir($this->getRealPath());
+
+        $this->destructed = true;
     }
 }

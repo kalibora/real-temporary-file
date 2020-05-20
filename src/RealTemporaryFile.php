@@ -13,8 +13,13 @@ class RealTemporaryFile extends \SplFileObject
 
     private $destructed = false;
 
-    public function __construct(string $prefix = self::DEFAULT_PREFIX, string $extension = null)
+    private static $init = false;
+    private static $removePaths = [];
+
+    public function __construct(string $prefix = self::DEFAULT_PREFIX, string $extension = null, bool $orphanRemoval = true)
     {
+        self::initialize();
+
         $file = sys_get_temp_dir() . '/' . str_replace('.', '_', uniqid($prefix, true));
 
         if ($extension) {
@@ -22,6 +27,11 @@ class RealTemporaryFile extends \SplFileObject
         }
 
         parent::__construct($file, 'w+');
+
+        if (!$orphanRemoval) {
+            $this->destructed = true;
+            self::$removePaths[] = $this->getRealPath();
+        }
     }
 
     public function __destruct()
@@ -43,8 +53,27 @@ class RealTemporaryFile extends \SplFileObject
         return new RealTemporaryUploadedFile($this, $clientFilename, $clientMediaType);
     }
 
-    public static function createWithExtension(string $extension) : self
+    public static function createWithExtension(string $extension, bool $orphanRemoval = true) : self
     {
-        return new self(self::DEFAULT_PREFIX, $extension);
+        return new self(self::DEFAULT_PREFIX, $extension, $orphanRemoval);
+    }
+
+    private static function initialize() : void
+    {
+        if (self::$init) {
+            return;
+        }
+
+        register_shutdown_function(function () {
+            foreach (self::$removePaths as $removePath) {
+                if (!file_exists($removePath)) {
+                    continue;
+                }
+
+                unlink($removePath);
+            }
+        });
+
+        self::$init = true;
     }
 }

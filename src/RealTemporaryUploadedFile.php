@@ -7,7 +7,7 @@ use Laminas\Diactoros\UploadedFile;
 class RealTemporaryUploadedFile extends UploadedFile
 {
     public function __construct(// Do not unlink
-    private RealTemporaryFile $tempFile, $clientFilename = null, $clientMediaType = null)
+        private RealTemporaryFile $tempFile, ?string $clientFilename = null, ?string $clientMediaType = null)
     {
         assert($tempFile->getRealPath() !== false);
 

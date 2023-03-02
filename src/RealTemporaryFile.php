@@ -14,6 +14,8 @@ class RealTemporaryFile extends \SplFileObject
     private bool $destructed = false;
 
     private static bool $init = false;
+
+    /** @var array<string> */
     private static array $removePaths = [];
 
     public function __construct(string $prefix = self::DEFAULT_PREFIX, string $extension = null, bool $orphanRemoval = true)
@@ -48,7 +50,7 @@ class RealTemporaryFile extends \SplFileObject
     /**
      * Mimicry UploadedFile
      */
-    public function toUploadedFile($clientFilename = null, $clientMediaType = null) : RealTemporaryUploadedFile
+    public function toUploadedFile(?string $clientFilename = null, ?string $clientMediaType = null) : RealTemporaryUploadedFile
     {
         return new RealTemporaryUploadedFile($this, $clientFilename, $clientMediaType);
     }

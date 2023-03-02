@@ -11,10 +11,10 @@ class RealTemporaryFile extends \SplFileObject
 {
     public const DEFAULT_PREFIX = 'kalibora_real_tmp_';
 
-    private $destructed = false;
+    private bool $destructed = false;
 
-    private static $init = false;
-    private static $removePaths = [];
+    private static bool $init = false;
+    private static array $removePaths = [];
 
     public function __construct(string $prefix = self::DEFAULT_PREFIX, string $extension = null, bool $orphanRemoval = true)
     {

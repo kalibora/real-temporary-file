@@ -10,7 +10,7 @@ use RecursiveIteratorIterator;
  */
 class RealTemporaryDirectory extends \SplFileInfo
 {
-    private $destructed = false;
+    private bool $destructed = false;
 
     /**
      * See: https://stackoverflow.com/a/1707859

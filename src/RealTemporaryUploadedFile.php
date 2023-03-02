@@ -2,7 +2,7 @@
 
 namespace Kalibora\RealTemporaryFile;
 
-use Zend\Diactoros\UploadedFile;
+use Laminas\Diactoros\UploadedFile;
 
 class RealTemporaryUploadedFile extends UploadedFile
 {

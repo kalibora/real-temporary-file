@@ -2,8 +2,8 @@
 
 namespace Kalibora\RealTemporaryFile;
 
+use Laminas\Diactoros\UploadedFile;
 use PHPUnit\Framework\TestCase;
-use Zend\Diactoros\UploadedFile;
 
 class RealTemporaryFileTest extends TestCase
 {

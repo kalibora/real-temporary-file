@@ -26,13 +26,16 @@
             "phpunit"
         ],
         "analyse" : [
-            "phpstan analyse -l max --no-progress src"
+            "phpstan analyse -l max --no-progress src --memory-limit=-1"
         ],
         "analyze" : [
             "@analyse"
         ],
         "cs": [
             "php-cs-fixer fix -v --dry-run --diff"
+        ],
+        "cs-fix": [
+            "php-cs-fixer fix -v"
         ]
     },
     "require": {
@@ -43,6 +46,6 @@
     "require-dev": {
         "phpunit/phpunit": "^9.6",
         "phpstan/phpstan": "^1.0",
-        "friendsofphp/php-cs-fixer": "^2.12"
+        "friendsofphp/php-cs-fixer": "^3.0"
     }
 }

@@ -44,7 +44,7 @@ jobs:
           restore-keys: ${{ runner.os }}-php${{ matrix.php-version }}-composer-
 
       - name: Install dependencies
-        run: composer install --no-interaction --prefer-dist --ignore-platform-req=php
+        run: composer install --no-interaction --prefer-dist
 
       - name: QA
         run: PHP_CS_FIXER_IGNORE_ENV=1 composer qa

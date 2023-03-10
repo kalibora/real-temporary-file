@@ -2,17 +2,13 @@
 
 namespace Kalibora\RealTemporaryFile;
 
-use Zend\Diactoros\UploadedFile;
+use Laminas\Diactoros\UploadedFile;
 
 class RealTemporaryUploadedFile extends UploadedFile
 {
-    // Do not unlink
-    private $tempFile;
-
-    public function __construct(RealTemporaryFile $tempFile, $clientFilename = null, $clientMediaType = null)
+    public function __construct(// Do not unlink
+        private RealTemporaryFile $tempFile, ?string $clientFilename = null, ?string $clientMediaType = null)
     {
-        $this->tempFile = $tempFile;
-
         assert($tempFile->getRealPath() !== false);
 
         parent::__construct(

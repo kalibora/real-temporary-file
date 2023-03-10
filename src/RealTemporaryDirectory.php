@@ -4,13 +4,14 @@ namespace Kalibora\RealTemporaryFile;
 
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use SplFileInfo;
 
 /**
  * @method string getRealPath()
  */
 class RealTemporaryDirectory extends \SplFileInfo
 {
-    private $destructed = false;
+    private bool $destructed = false;
 
     /**
      * See: https://stackoverflow.com/a/1707859
@@ -49,6 +50,7 @@ class RealTemporaryDirectory extends \SplFileInfo
 
         $files = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
         foreach ($files as $file) {
+            assert($file instanceof SplFileInfo);
             if ($file->isDir()) {
                 rmdir($file->getRealPath());
             } else {

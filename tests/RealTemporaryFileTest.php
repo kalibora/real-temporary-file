@@ -36,7 +36,7 @@ class RealTemporaryFileTest extends TestCase
     {
         $file = new RealTemporaryFile();
 
-        $this->assertRegexp('/^kalibora_real_tmp_.*$/', $file->getFilename());
+        $this->assertMatchesRegularExpression('/^kalibora_real_tmp_.*$/', $file->getFilename());
         $this->assertSame('', $file->getExtension());
     }
 
@@ -44,7 +44,7 @@ class RealTemporaryFileTest extends TestCase
     {
         $file = RealTemporaryFile::createWithExtension('txt');
 
-        $this->assertRegexp('/^kalibora_real_tmp_.*\.txt$/', $file->getFilename());
+        $this->assertMatchesRegularExpression('/^kalibora_real_tmp_.*\.txt$/', $file->getFilename());
         $this->assertSame('txt', $file->getExtension());
     }
 

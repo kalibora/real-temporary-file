@@ -2,12 +2,13 @@
 
 namespace Kalibora\RealTemporaryFile;
 
+use SplFileObject;
 use Zend\Diactoros\UploadedFile;
 
 /**
  * @method string getRealPath()
  */
-class RealTemporaryFile extends \SplFileObject
+class RealTemporaryFile extends SplFileObject
 {
     public const DEFAULT_PREFIX = 'kalibora_real_tmp_';
 

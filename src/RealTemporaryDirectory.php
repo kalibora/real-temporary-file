@@ -4,12 +4,13 @@ namespace Kalibora\RealTemporaryFile;
 
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use RuntimeException;
 use SplFileInfo;
 
 /**
  * @method string getRealPath()
  */
-class RealTemporaryDirectory extends \SplFileInfo
+class RealTemporaryDirectory extends SplFileInfo
 {
     private bool $destructed = false;
 
@@ -21,7 +22,7 @@ class RealTemporaryDirectory extends \SplFileInfo
         $tempfile = tempnam(sys_get_temp_dir(), $prefix);
 
         if ($tempfile === false) {
-            throw new \RuntimeException('Cannot create temp file.');
+            throw new RuntimeException('Cannot create temp file.');
         }
 
         if (file_exists($tempfile)) {
@@ -31,7 +32,7 @@ class RealTemporaryDirectory extends \SplFileInfo
         mkdir($tempfile, $mode = 0777);
 
         if (!is_dir($tempfile)) {
-            throw new \RuntimeException('Cannot create directory. ' . $tempfile);
+            throw new RuntimeException('Cannot create directory. ' . $tempfile);
         }
 
         parent::__construct($tempfile);

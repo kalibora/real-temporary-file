@@ -19,7 +19,7 @@ class RealTemporaryFile extends SplFileObject
     /** @var array<string> */
     private static array $removePaths = [];
 
-    public function __construct(string $prefix = self::DEFAULT_PREFIX, string $extension = null, bool $orphanRemoval = true)
+    public function __construct(string $prefix = self::DEFAULT_PREFIX, ?string $extension = null, bool $orphanRemoval = true)
     {
         self::initialize();
 
